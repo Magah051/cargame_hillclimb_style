@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CarMovement : MonoBehaviour
 {
@@ -30,5 +31,11 @@ public class CarMovement : MonoBehaviour
         backWheelRig.AddTorque(-movement * speed * Time.fixedDeltaTime); //Adiciona força a roda de trás
         frontWheelRig.AddTorque(-movement * speed * Time.fixedDeltaTime);//Adiciona força a roda da frente
         carRig.AddTorque(-movement * torque * Time.fixedDeltaTime);//Adiciona força ao corpo do carro
+
+        if (transform.position.x >= 138f)
+        {
+            //Reiniciando o jogo
+            SceneManager.LoadScene(0);
+        }
     }
 }

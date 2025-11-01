@@ -15,7 +15,7 @@ public class Gas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gasol.fillAmount -= Input.GetAxis("Horizontal") / 700f;
+        //gasol.fillAmount -= Input.GetAxis("Horizontal") / 700f;
     }
 
     public void AddFuel()
