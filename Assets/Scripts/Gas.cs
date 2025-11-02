@@ -8,6 +8,8 @@ public class Gas : MonoBehaviour
 {
     public Image gasol;
     public Text dialogueText;
+    public float consumptionFuel = 600f;
+    public float fuelPowerUp = 0.13f;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,7 @@ public class Gas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gasol.fillAmount -= Input.GetAxis("Horizontal") / 600f;
+        gasol.fillAmount -= Input.GetAxis("Horizontal") / consumptionFuel;
 
         if (gasol.fillAmount == 0)
         {
@@ -28,6 +30,6 @@ public class Gas : MonoBehaviour
 
     public void AddFuel()
     {
-        gasol.fillAmount += 0.13f;
+        gasol.fillAmount += fuelPowerUp;
     }
 }
