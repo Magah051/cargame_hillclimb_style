@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
@@ -8,27 +9,35 @@ public class GameController : MonoBehaviour
     [SerializeField] private KeyCode pauseKey = KeyCode.Escape;
 
     [Header("UI de Pause")]
-    [SerializeField] private CanvasGroup pauseUI;   // CanvasGroup do painel de pausa (full screen)
+    [SerializeField] private CanvasGroup pauseUI;   // Panel full-screen com Image preto + CanvasGroup
+    [SerializeField] private Button pauseButton;    // <- arraste seu botão Pause aqui (opcional)
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button returnButton;
-    [Range(0f, 1f)][SerializeField] private float dimAlpha = 0.6f; // quão escuro fica o fundo
+    [Range(0f, 1f)][SerializeField] private float dimAlpha = 0.6f;
 
     private bool isPaused = false;
 
     private void Awake()
     {
-        // Liga os botões se foram arrastados no Inspector
+        // Garante EventSystem na cena
+        if (FindObjectOfType<EventSystem>() == null)
+        {
+            var es = new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
+        }
+
+        // Liga listeners se referência existir
+        if (pauseButton) pauseButton.onClick.AddListener(Pause);
         if (resumeButton) resumeButton.onClick.AddListener(Resume);
         if (returnButton) returnButton.onClick.AddListener(ReturnToMenu);
 
-        // Garante o nível de escurecimento do fundo (o Panel deve ter um Image preto)
+        // Ajusta opacidade base do fundo (Image preto no mesmo GO do CanvasGroup)
         if (pauseUI)
         {
             var img = pauseUI.GetComponent<Image>();
             if (img)
             {
                 var c = img.color;
-                c.a = dimAlpha;
+                c.a = dimAlpha; // alpha base quando visível
                 img.color = c;
             }
         }
@@ -36,7 +45,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        ApplyPause(false); // começa jogável
+        ApplyPause(false); // começa despausado
     }
 
     private void Update()
@@ -45,33 +54,29 @@ public class GameController : MonoBehaviour
             TogglePause();
     }
 
-    // Pode ser chamado por um botão "Pause"
+    // USE ESTE MÉTODO no OnClick do botão Pause, se não usar a referência pauseButton:
     public void OnPauseButton()
     {
         Pause();
     }
 
-    public void TogglePause()
-    {
-        ApplyPause(!isPaused);
-    }
-
+    public void TogglePause() => ApplyPause(!isPaused);
     public void Pause()
     {
+        Debug.Log("[GameController] Pause clicado");
         ApplyPause(true);
     }
-
     public void Resume()
     {
+        Debug.Log("[GameController] Resume clicado");
         ApplyPause(false);
     }
 
     public void ReturnToMenu()
     {
-        // Sempre restaura o tempo/áudio antes de trocar de cena
         Time.timeScale = 1f;
         AudioListener.pause = false;
-        SceneManager.LoadScene("Menu"); // nome exato da cena do menu
+        SceneManager.LoadScene("Menu");
     }
 
     private void ApplyPause(bool pause)
@@ -82,8 +87,8 @@ public class GameController : MonoBehaviour
 
         if (pauseUI)
         {
-            pauseUI.alpha = pause ? 1f : 0f;
-            pauseUI.blocksRaycasts = pause;
+            pauseUI.alpha = pause ? 1f : 0f;          // mostra/oculta
+            pauseUI.blocksRaycasts = pause;           // captura cliques só quando visível
             pauseUI.interactable = pause;
         }
     }
