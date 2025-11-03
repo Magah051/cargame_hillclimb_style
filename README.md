@@ -86,6 +86,14 @@ O jogo termina quando:
 
 ---
 
+## 🎨 **Imagens da Gameplay**
+<img width="1665" height="934" alt="Capturar_2025_11_02_21_35_50_982" src="https://github.com/user-attachments/assets/899717e9-8b52-406b-baa4-9b54bb9d9ab2" />
+<img width="1665" height="934" alt="Capturar_2025_11_02_21_35_56_50" src="https://github.com/user-attachments/assets/109bad41-59ac-4ddc-9b21-bae09cad1584" />
+<img width="1665" height="934" alt="Capturar_2025_11_02_21_36_06_316" src="https://github.com/user-attachments/assets/d4933018-a3eb-4e50-a9ab-612bbd6e9ced" />
+<img width="1665" height="934" alt="Capturar_2025_11_02_21_36_22_980" src="https://github.com/user-attachments/assets/16a78269-6e6c-4cb1-8cbe-3c4cb3170435" />
+
+
+
 ## 🧠 **Arquitetura Técnica**
 
 ```mermaid
@@ -100,3 +108,4 @@ graph TD
     H -->|Recarrega| I[GasFuel]
     F -->|Colide| J[StarCount]
     B -->|Pause| K[CanvasGroup]
+
