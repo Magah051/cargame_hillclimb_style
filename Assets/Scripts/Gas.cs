@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -7,23 +5,20 @@ using UnityEngine.SceneManagement;
 public class Gas : MonoBehaviour
 {
     public Image gasol;
-    public Text dialogueText;
     public float consumptionFuel = 600f;
     public float fuelPowerUp = 0.13f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float consumptionMuml = 100f;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        gasol.fillAmount -= Input.GetAxis("Horizontal") / consumptionFuel;
-
-        if (gasol.fillAmount == 0)
+        // reduz combustível somente se estiver acelerando
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            //Reiniciando o jogo
+            gasol.fillAmount -= 1f / consumptionFuel * Time.deltaTime * consumptionMuml;
+        }
+
+        if (gasol.fillAmount <= 0f)
+        {
             SceneManager.LoadScene(0);
         }
     }

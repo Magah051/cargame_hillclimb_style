@@ -508,9 +508,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gasol: {fileID: 844989804}
-  dialogueText: {fileID: 0}
   consumptionFuel: 1200
   fuelPowerUp: 0.5
+  consumptionMuml: 500
 --- !u!114 &66887447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5952,9 +5952,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0098843835, y: 0}
+  m_Offset: {x: -0.009884706, y: 0}
   serializedVersion: 2
-  m_Radius: 0.7406109
+  m_Radius: 0.69534326
 --- !u!1 &1165982596
 GameObject:
   m_ObjectHideFlags: 0
@@ -7441,9 +7441,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0023203928, y: 0.00000024164046}
+  m_Offset: {x: 0.002709595, y: 0.00000024164046}
   serializedVersion: 2
-  m_Radius: 0.71458495
+  m_Radius: 0.674347
 --- !u!1001 &1471811463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9766,8 +9766,8 @@ MonoBehaviour:
   carRig: {fileID: 1993313836}
   backWheelRig: {fileID: 1150529075}
   frontWheelRig: {fileID: 1464209356}
-  speed: 80
-  torque: 50
+  speed: 50
+  torque: 20
 --- !u!60 &1993313839
 PolygonCollider2D:
   m_ObjectHideFlags: 0
